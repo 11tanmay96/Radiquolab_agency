@@ -1,0 +1,129 @@
+@import url(/css/global/base.css);
+@import url(/css/global/navbar.css);
+@import url(/css/global/establish.css);
+@import url(/css/global/agency.css);
+@import url(/css/global/whyus.css);
+@import url(/css/global/industries.css);
+@import url(/css/global/services.css);
+@import url(/css/global/design-process.css);
+@import url(/css/global/core-value.css);
+@import url(/css/global/testimonial.css);
+@import url(/css/global/faq.css);
+@import url(/css/global/form.css);
+@import url(/css/global/footer.css);
+
+/* ==========================================================================
+   ABOUT HERO LAYOUT
+   ========================================================================== */
+.about-hero-section {
+  width: 100%;
+  max-width: 1320px;
+  margin: 3.5rem auto 4rem;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+.about-hero-container {
+  display: grid;
+  grid-template-columns: 1.35fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.about-hero-title {
+  font-family: var(--font-heading);
+  font-size: 3.75rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--dark-navy);
+  margin: 0 0 1.5rem;
+}
+
+.about-hero-title .text-blue {
+  color: var(--primary-blue);
+}
+
+.about-hero-description {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 580px;
+  margin: 0 0 2rem;
+}
+
+.about-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ==========================================================================
+   RIGHT FEATURE CARD (Desktop Only)
+   ========================================================================== */
+.about-hero-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.about-feature-card {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-white);
+  border: 1.5px solid var(--border-dark);
+  border-radius: var(--radius-xl);
+  box-shadow: 6px 6px 0 var(--primary-blue);
+  padding: 2.25rem 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about-feature-card:hover {
+  transform: translateY(-2px);
+}
+
+.feature-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--dark-navy);
+  margin: 0 0 0.85rem;
+  letter-spacing: -0.01em;
+}
+
+.feature-card-text {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--dark-navy);
+  margin: 0;
+  font-weight: 500;
+}
+
+.feature-dash-indicators {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.dash-bar {
+  width: 18px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--light-border);
+  transition: background-color 0.25s ease, width 0.25s ease;
+}
+
+.dash-bar.active {
+  background-color: var(--dark-navy);
+  width: 22px;
+}

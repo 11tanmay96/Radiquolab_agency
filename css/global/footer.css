@@ -1,0 +1,219 @@
+/* ==========================================================================
+   FOOTER (Neo-Brutalist Dark Theme)
+   ========================================================================== */
+.footer,
+footer,
+[data-include*="footer"] {
+  width: 100%;
+  background-color: var(--dark-navy);
+  color: var(--bg-white);
+  padding: 5rem 0 2.5rem;
+  box-sizing: border-box;
+  margin-top: 120px !important;
+  display: block;
+}
+
+/* ==========================================================================
+   TOP CTA SECTION
+   ========================================================================== */
+.footer-cta {
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 5rem;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+.footer-cta-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--bg-white);
+  margin: 0 0 1rem;
+  line-height: 1.15;
+}
+
+.footer-cta-sub {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--light-border);
+  margin: 0 auto 2.25rem;
+  max-width: 600px;
+}
+
+/* CTA Button */
+.footer-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-blue);
+  color: var(--bg-white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.9rem 2.2rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid #000000;
+  box-shadow: var(--btn-shadow);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.footer-cta-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 #000000;
+}
+
+/* ==========================================================================
+   MAIN 4-COLUMN GRID
+   ========================================================================== */
+.footer-content {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 3.5rem;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+/* Brand info */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-logo-wrap {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+
+.brand-logo {
+  width: 110px;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.brand-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--bg-white);
+  margin: 0 0 0.6rem;
+}
+
+.brand-desc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-subtle);
+  margin: 0;
+  max-width: 270px;
+}
+
+/* Columns & Links */
+.footer-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.column-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--bg-white);
+  margin: 0 0 1.25rem;
+}
+
+.footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.footer-links li,
+.footer-links a,
+.footer-links span {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: var(--light-border);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--bg-white);
+}
+
+/* ==========================================================================
+   BOTTOM COPYRIGHT BAR
+   ========================================================================== */
+.footer-bottom {
+  max-width: 1320px;
+  margin: 4.5rem auto 0;
+  padding: 2rem 2rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer,
+  footer,
+  [data-include*="footer"] {
+    margin-top: 80px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding: 3.5rem 0 2rem;
+  }
+
+  .footer-cta {
+    margin-bottom: 3.5rem;
+  }
+
+  .footer-cta-title {
+    font-size: 1.85rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+    margin-top: 3.5rem;
+  }
+}

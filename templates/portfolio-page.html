@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="/css/pages/portfolio-page.css" />
+    <link rel="icon" type="image/x-icon" href="/assets/icons/logo.svg" />
+
+    <script src="/js/global/services.js" defer></script>
+    <script src="/js/global/testimonial.js" defer></script>
+    <script src="/js/global/faq.js" defer></script>
+    <script src="/js/global/form.js" defer></script>
+    <script src="/js/global/industries.js" defer></script>
+    <script src="/js/global/core-value.js" defer></script>
+    <script src="/js/global/include.js" defer></script>
+  </head>
+  <body>
+    <!-- Navigation Header -->
+    <div data-include="/templates/components/navbar.html"></div>
+
+    <!-- ================= PORTFOLIO HERO SECTION ================= -->
+    <section class="portfolio-hero-section" id="portfolioHero">
+      <div class="portfolio-hero-container">
+        <!-- Top Pill Badge -->
+        <div class="portfolio-hero-badge">
+          <span class="dot"></span>
+          <span>A FEW PROJECTS WE ARE PROUD OF</span>
+        </div>
+
+        <!-- Main Heading -->
+        <h1 class="portfolio-hero-title">Case Studies</h1>
+
+        <!-- Thin Divider Line -->
+        <div class="portfolio-hero-divider"></div>
+
+        <!-- Subtitle / Tagline -->
+        <p class="portfolio-hero-subtitle">
+          A curated showcase of meaningful design experiences.
+        </p>
+
+        <!-- Call to Action Button -->
+        <div class="portfolio-hero-actions">
+          <a href="#contact" class="portfolio-hero-btn">Book a call</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Studies -->
+    <div data-include="/templates/components/case-studies.html"></div>
+
+    <!-- ================= CORE VALUES SECTION ================= -->
+    <div data-include="/templates/components/core-value.html"></div>
+
+    <!-- Testimonials Section -->
+    <div data-include="/templates/components/testimonial.html"></div>
+
+    <!-- FAQ Section -->
+    <div data-include="/templates/components/faq.html"></div>
+
+    <!-- Contact Form Section -->
+    <div data-include="/templates/components/contact-form.html"></div>
+
+    <!-- Footer -->
+    <div data-include="/templates/components/footer.html"></div>
+  </body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us</title>
+
+    <link rel="icon" type="image/x-icon" href="/assets/icons/logo.svg" />
+
+    <!-- Core Global Base Styles -->
+    <link rel="stylesheet" href="/css/global/base.css" />
+
+    <!-- Page Specific Styles -->
+    <link rel="stylesheet" href="/css/pages/about-page.css" />
+
+    <!-- Deferred Scripts -->
+    <script src="/js/pages/about-page.js" defer></script>
+    <script src="/js/global/services.js" defer></script>
+    <script src="/js/global/design-process.js" defer></script>
+    <script src="/js/global/testimonial.js" defer></script>
+    <script src="/js/global/faq.js" defer></script>
+    <script src="/js/global/form.js" defer></script>
+    <script src="/js/global/industries.js" defer></script>
+    <script src="/js/global/core-value.js" defer></script>
+    <script src="/js/global/include.js" defer></script>
+  </head>
+  <body>
+    <!-- Navigation Header -->
+    <div data-include="/templates/components/navbar.html"></div>
+
+    <!-- ================= ABOUT US HERO SECTION ================= -->
+    <section class="about-hero-section" id="aboutHero">
+      <div class="about-hero-container">
+        <!-- Left Column: Intro & Actions -->
+        <div class="about-hero-left">
+          <!-- Hero Blue-Themed Pill Badge -->
+          <div class="hero-pill-badge">
+            <span class="dot"></span>
+            <span>INSIDE RADIQUOLAB</span>
+          </div>
+
+          <h1 class="about-hero-title">
+            Transforming ideas,<br />
+            <span class="text-blue">elevating brands</span>
+          </h1>
+
+          <p class="about-hero-description">
+            Radiquolab is a Pune-based digital product design studio
+            specializing in UI/UX, branding, service design, and no-code
+            development. We partner with startups and scale-ups to build what
+            matters.
+          </p>
+
+          <div class="about-hero-actions">
+            <a href="#case-studies" class="btn btn-outline">View Portfolio</a>
+            <a href="/templates/contact-us-page.html" class="btn btn-solid">Book a call</a>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Rotating Feature Card -->
+        <div class="about-hero-right">
+          <div class="about-feature-card" id="aboutFeatureCard">
+            <div class="card-content-area" id="aboutFeatureContent">
+              <h3 class="feature-card-title">Strategy-First</h3>
+              <p class="feature-card-text">
+                Design for outcomes, not aesthetics. Every decision backed by
+                data.
+              </p>
+            </div>
+
+            <!-- Dash Progress Indicators -->
+            <div class="feature-dash-indicators" id="featureDashes">
+              <span class="dash-bar active" data-index="0"></span>
+              <span class="dash-bar" data-index="1"></span>
+              <span class="dash-bar" data-index="2"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <div data-include="/templates/components/about-us.html"></div>
+
+    <!-- Metrics Section -->
+    <div data-include="/templates/components/metrics.html"></div>
+
+    <!-- Design Process Section -->
+    <div data-include="/templates/components/design-process.html"></div>
+
+    <!-- Why Us Section -->
+    <div data-include="/templates/components/why-us.html"></div>
+
+    <!-- Industries Orbit Section -->
+    <div data-include="/templates/components/industries.html"></div>
+
+    <!-- Services Section -->
+    <div data-include="/templates/components/services.html"></div>
+
+    <!-- Core Values Section -->
+    <div data-include="/templates/components/core-value.html"></div>
+
+    <!-- Testimonials Section -->
+    <div data-include="/templates/components/testimonial.html"></div>
+
+    <!-- FAQ Section -->
+    <div data-include="/templates/components/faq.html"></div>
+
+    <!-- Contact Form Section -->
+    <div data-include="/templates/components/contact-form.html"></div>
+
+    <!-- Footer -->
+    <div data-include="/templates/components/footer.html"></div>
+  </body>
+</html>

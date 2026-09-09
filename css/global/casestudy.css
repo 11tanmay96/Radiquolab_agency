@@ -1,0 +1,143 @@
+/* ==========================================================================
+   CASE STUDIES GRID & CARDS
+   ========================================================================== */
+.case-studies-section {
+  width: 100%;
+  max-width: 1280px;
+  margin: 5rem auto;
+  padding: 0 1.5rem;
+}
+
+.case-studies-section .section-top {
+  margin-bottom: 3rem;
+}
+
+.case-studies-section .section-heading {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--dark-navy);
+}
+
+.case-studies-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+.case-card {
+  background: var(--bg-white);
+  border: 1.5px solid var(--border-dark);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.case-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 4px 4px 0px var(--border-dark);
+}
+
+.card-image-wrapper {
+  width: 100%;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.card-image-wrapper .card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.card-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.card-title {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+  margin: 0;
+}
+
+.card-arrow {
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--primary-blue);
+  transition: transform 0.2s ease;
+}
+
+.case-card:hover .card-arrow {
+  transform: translateX(4px);
+}
+
+.card-divider {
+  border: none;
+  height: 1px;
+  background-color: var(--light-border);
+  margin: 0 0 1.25rem 0;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.case-card .tag {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.65rem;
+  border: 1.25px solid var(--border-dark);
+  border-radius: 4px;
+  color: var(--dark-navy);
+  background: var(--bg-white);
+}
+
+/* Coming Soon Empty Card */
+.case-card-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 480px;
+  cursor: default;
+}
+
+.case-card-placeholder:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.placeholder-text {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--primary-blue);
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 992px) {
+  .case-studies-grid {
+    grid-template-columns: 1fr;
+  }
+}

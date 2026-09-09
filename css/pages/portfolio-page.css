@@ -1,0 +1,147 @@
+@import url(/css/global/base.css);
+@import url(/css/global/navbar.css);
+@import url(/css/global/casestudy.css);
+@import url(/css/global/services.css);
+@import url(/css/global/core-value.css);
+@import url(/css/global/testimonial.css);
+@import url(/css/global/faq.css);
+@import url(/css/global/form.css);
+@import url(/css/global/footer.css);
+
+/* ==========================================================================
+   PORTFOLIO HERO SECTION
+   ========================================================================== */
+.portfolio-hero-section {
+  width: 100%;
+  max-width: 1320px;
+  margin: 3.5rem auto 2.5rem;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+.portfolio-hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* Badge (Inherits unified styles from base.css) */
+.portfolio-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 1.15rem;
+  background-color: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  border-radius: 9999px;
+  color: var(--primary-blue);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 1.25rem;
+}
+
+.portfolio-hero-badge .dot {
+  width: 7.5px;
+  height: 7.5px;
+  border-radius: 50%;
+  background-color: var(--primary-blue);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Title */
+.portfolio-hero-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-h1);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--dark-navy);
+  margin: 0 0 1.5rem 0;
+}
+
+/* Full-width Horizontal Divider */
+.portfolio-hero-divider {
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--light-border);
+  margin-bottom: 1.5rem;
+}
+
+/* Subtitle */
+.portfolio-hero-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-body-md);
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin: 0 0 2rem 0;
+  font-weight: 500;
+  max-width: 680px;
+}
+
+/* CTA Button */
+.portfolio-hero-actions {
+  display: flex;
+  align-items: center;
+  width: auto;
+}
+
+.portfolio-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-blue);
+  color: var(--bg-white);
+  font-family: var(--font-body);
+  font-size: var(--text-btn);
+  font-weight: 600;
+  padding: 0.85rem 1.85rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-dark);
+  box-shadow: var(--btn-shadow);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.portfolio-hero-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--btn-shadow-hover);
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 992px) {
+  .portfolio-hero-title {
+    font-size: 3.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-hero-section {
+    margin: 2.5rem auto 1.5rem;
+  }
+
+  .portfolio-hero-title {
+    font-size: 2.25rem;
+  }
+
+  .portfolio-hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .portfolio-hero-actions {
+    width: 100%;
+  }
+
+  .portfolio-hero-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

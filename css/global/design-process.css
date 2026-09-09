@@ -1,0 +1,288 @@
+/* ==========================================================================
+   DESIGN PROCESS SECTION
+   ========================================================================== */
+.design-process {
+  width: 100%;
+  max-width: 1320px;
+  margin: 5rem auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Badge (Pill) - Connected to Base Tokens */
+.process-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  background: var(--bg-white);
+  border: 1.5px solid var(--border-dark);
+  border-radius: 9px;
+  box-shadow: 3px 3px 0 var(--border-dark);
+  color: var(--dark-navy);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+.process-label .dot,
+.process-label span:first-child {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--border-dark);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.design-process h2,
+.design-process .section-heading {
+  font-family: var(--font-heading);
+  font-size: 3.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--dark-navy);
+  margin: 0 0 2.5rem 0;
+  line-height: 1.1;
+}
+
+/* ==========================================================================
+   MAIN PROCESS BOX
+   ========================================================================== */
+.process-box {
+  width: 100% !important;
+  background-color: var(--bg-white) !important;
+  border-top: 2px solid var(--primary-blue);
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+}
+
+/* ==========================================================================
+   HORIZONTAL TABS
+   ========================================================================== */
+.process-nav-wrapper {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: var(--bg-white) !important;
+  border-bottom: 1.5px solid var(--border-dark) !important;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.process-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  width: max-content;
+  min-width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  background-color: var(--bg-white) !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+.process-nav::-webkit-scrollbar {
+  display: none;
+}
+
+/* Single Tab */
+.process-tab {
+  position: relative;
+  flex: 0 0 auto;
+  height: 90px;
+  min-width: 270px;
+  padding: 0 2rem;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--bg-white) !important;
+  border: none !important;
+  color: var(--dark-navy);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.process-tab:last-child {
+  border-right: none;
+}
+
+/* Top & Bottom Dotted Tracks */
+.process-tab::before,
+.process-tab::after {
+  content: "";
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 2px;
+  background-image: radial-gradient(circle, var(--text-subtle) 1px, transparent 1px);
+  background-size: 6px 2px;
+  background-repeat: repeat-x;
+}
+
+.process-tab::before {
+  top: 16px;
+}
+
+.process-tab::after {
+  bottom: 16px;
+}
+
+/* Blue Active Indicator */
+.process-tab.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: var(--primary-blue) !important;
+  background-image: none !important;
+}
+
+.process-tab span {
+  font-weight: 800;
+  margin-right: 0.35rem;
+}
+
+.process-tab:hover {
+  color: var(--primary-blue);
+}
+
+.process-tab.active {
+  color: var(--dark-navy);
+}
+
+/* ==========================================================================
+   BOTTOM DETAILS CONTENT AREA
+   ========================================================================== */
+.process-content {
+  display: grid !important;
+  grid-template-columns: 75px 1fr !important;
+  gap: 2.5rem !important;
+  padding: 2.5rem 2rem 3rem 1.5rem !important;
+  margin: 0 !important;
+  background-color: var(--bg-white) !important;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+/* Left Icon Box */
+.process-icon {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-white);
+  border: 1.5px solid var(--border-dark);
+  border-radius: 4px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.process-icon img,
+.process-icon svg {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+/* Right Content Info & List */
+.process-information {
+  width: 100%;
+}
+
+.process-information h3 {
+  margin: 0;
+  padding-bottom: 1rem;
+  border-bottom: 1.5px dashed var(--light-border);
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--dark-navy);
+}
+
+.process-information ul {
+  margin: 1.25rem 0 0 0;
+  padding-left: 1.25rem;
+  list-style-type: disc;
+}
+
+.process-information li {
+  margin-bottom: 0.85rem;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--dark-navy);
+}
+
+.process-information.change {
+  animation: processFadeIn 0.25s ease forwards;
+}
+
+@keyframes processFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 992px) {
+  .design-process h2,
+  .design-process .section-heading {
+    font-size: 2.5rem;
+  }
+  .process-tab {
+    min-width: 230px;
+    height: 80px;
+    font-size: 0.9rem;
+    padding: 0 1.25rem;
+  }
+  .process-content {
+    grid-template-columns: 60px 1fr !important;
+    gap: 1.75rem !important;
+    padding: 2rem 1rem !important;
+  }
+  .process-icon {
+    width: 55px;
+    height: 55px;
+  }
+}
+
+@media (max-width: 640px) {
+  .design-process h2,
+  .design-process .section-heading {
+    font-size: 2rem;
+  }
+  .process-content {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+    padding: 1.5rem 0.5rem !important;
+  }
+}

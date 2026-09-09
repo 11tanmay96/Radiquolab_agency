@@ -1,0 +1,572 @@
+@import url("/assets/font/fonts.css");
+
+
+/* ==========================================================================
+   1. DESIGN TOKENS & ROOT VARIABLES
+   ========================================================================== */
+:root {
+  /* Font Families */
+  --font-heading: "Sora", sans-serif;
+  --font-body: "Onest", sans-serif;
+  --font-accent: "Gochi Hand", cursive;
+  --font-primary: var(--font-heading);
+  --font-secondary: var(--font-body);
+
+  /* Typography Scale */
+  --text-h1: 64px;
+  --text-h2: 48px;
+  --text-h3: 36px;
+  --text-h4: 28px;
+  --text-h5: 22px;
+  --text-h6: 18px;
+
+  --text-ui-large: 200px;
+  --text-body-lg: 20px;
+  --text-body-md: 18px;
+  --text-body-sm: 16px;
+  --text-label: 14px;
+  --text-btn: 16px;
+  --text-link: 16px;
+  --text-caption: 12px;
+  --text-overline: 12px;
+  --text-ui-18: 18px;
+  --text-handwriting: 16px;
+
+  /* Calibrated Brand Colors */
+  --primary-blue: #102dc7;        /* Logo & button electric blue */
+  --primary-blue-alt: #0c24a3;    /* Deep hover blue */
+  --primary-blue-dark: #07176b;
+  --dark-navy: #070e3a;
+  --dark-navy-deep: #051036;
+  --text-muted: #5e657c;
+  --text-subtle: #9298b5;
+  --border-dark: #080f3d;
+  --border-dashed: #777dcc;
+  --light-border: #ccd3e3;
+  --purple-shadow: #5d46be;
+
+  /* Backgrounds & Tints */
+  --bg-white: #ffffff;
+  --bg-light-blue: #ebf0ff;
+  --badge-bg: #ebf0ff;
+  --badge-border: rgba(16, 45, 199, 0.18);
+  --grid-line: #c3c6dc;
+
+  /* Shadows & Elevation */
+  --btn-shadow: 4px 4px 0px #000000;
+  --btn-shadow-hover: 6px 6px 0px #000000;
+  --badge-shadow: 3.5px 3.5px 0 var(--border-dark);
+  --card-shadow-black: 6px 7px 0px #000000;
+  --card-shadow-blue: 6px 7px 0px var(--primary-blue);
+  --card-shadow-purple: 8px 8px 0px #5c43d8;
+
+  /* Border Radii */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+/* ==========================================================================
+   2. GLOBAL RESETS & DOCUMENT BASELINE
+   ========================================================================== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: 400;
+  color: var(--dark-navy);
+  background-color: var(--bg-white);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to right, var(--grid-line) 1px, var(--bg-white) 1px);
+  background-size: 28px 28px;
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+  display: block;
+  width: 100%;
+}
+
+/* ==========================================================================
+   3. TYPOGRAPHY
+   ========================================================================== */
+h1 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h1);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h2);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--dark-navy) !important;
+}
+
+h3 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h3);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+h4 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h4);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+h5 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h5);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+h6 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h6);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: var(--text-link);
+  font-weight: 500;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font-family: var(--font-body);
+  font-size: var(--text-btn);
+  font-weight: 500;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Section Headings Hierarchy */
+.services-section > h2,
+.why-us > h2,
+.industries-section > h2,
+.core-values > h2,
+.testimonial-section > h2,
+.faq-section > h2,
+.establish-section h2,
+.agency-section h2,
+.establish-title,
+.agency-title {
+  color: var(--dark-navy, #070e3a) !important;
+  font-family: var(--font-heading) !important;
+  font-size: 3.25rem;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.1;
+}
+
+/* ==========================================================================
+   4. BADGES & LABELS
+   ========================================================================== */
+
+/* Hero Only Badges (Light Blue Tint) */
+.hero-pill-badge,
+.location-badge,
+.portfolio-hero-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.55rem !important;
+  width: fit-content !important;
+  padding: 0.45rem 1.15rem !important;
+  background-color: var(--badge-bg) !important;
+  border: 1px solid var(--badge-border) !important;
+  border-radius: 9px !important;
+  box-shadow: none !important;
+  color: var(--primary-blue) !important;
+  font-family: var(--font-heading) !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+  margin-bottom: 1.25rem !important;
+  transform: none !important;
+}
+
+.hero-pill-badge .dot,
+.location-badge .dot,
+.portfolio-hero-badge .dot {
+  width: 7.5px !important;
+  height: 7.5px !important;
+  border-radius: 50% !important;
+  background-color: var(--primary-blue) !important;
+  display: inline-block !important;
+  flex-shrink: 0 !important;
+  border: none !important;
+}
+
+/* Global Brutalist Badges (White Box with Shadow) */
+.pill-badge,
+.service-label,
+.services-label,
+.service-side-label,
+.next-project-label,
+.cs-side-label,
+.establish-badge,
+.agency-badge,
+.about-us-badge,
+.about-label {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.55rem !important;
+  width: fit-content !important;
+  padding: 0.45rem 1.15rem !important;
+  background: var(--bg-white, #ffffff) !important;
+  border: 1.5px solid var(--border-dark, #080f3d) !important;
+  border-radius: 9px !important;
+  box-shadow: var(--badge-shadow) !important;
+  color: var(--dark-navy, #080f3d) !important;
+  font-family: var(--font-heading) !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+  margin-bottom: 1.25rem !important;
+  transform: none !important;
+}
+
+.pill-badge .dot,
+.service-label .dot,
+.services-label .dot,
+.service-side-label .dot,
+.next-project-label .dot,
+.cs-side-label .dot,
+.establish-badge .dot,
+.agency-badge .dot,
+.about-us-badge .dot,
+.about-label .dot,
+.service-label span:first-child,
+.service-side-label span:first-child,
+.next-project-label span:first-child {
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background-color: var(--border-dark, #080f3d) !important;
+  display: inline-block !important;
+  flex-shrink: 0 !important;
+  border: none !important;
+}
+
+/* ==========================================================================
+   5. BUTTONS
+   ========================================================================== */
+.btn,
+.service-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.85rem;
+  font-family: var(--font-body);
+  font-size: var(--text-btn);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border: 1.5px solid var(--border-dark);
+}
+
+.btn-outline,
+.service-btn-light {
+  background-color: var(--bg-white);
+  color: var(--dark-navy);
+  box-shadow: var(--btn-shadow);
+}
+
+.btn-outline:hover,
+.service-btn-light:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--btn-shadow-hover);
+}
+
+.btn-solid,
+.service-btn-blue {
+  background-color: var(--primary-blue);
+  color: var(--bg-white);
+  box-shadow: var(--btn-shadow);
+}
+
+.btn-solid:hover,
+.service-btn-blue:hover {
+  background-color: var(--primary-blue-alt);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--btn-shadow-hover);
+}
+
+/* ==========================================================================
+   6. GLOBAL SECTION SPACING & LAYOUT
+   ========================================================================== */
+body > section:first-of-type,
+main > section:first-of-type,
+.about-hero-section,
+.case-studies-section:first-of-type,
+.contact-page-hero,
+.subpage-hero {
+  padding-top: 5rem !important;
+}
+
+main > section,
+body > section,
+.case-study-page > section,
+.about-hero-section,
+.services-section,
+.core-values,
+.design-process,
+.why-us,
+.industries-section,
+.cs-section,
+.cs-hero,
+.cs-feature-banner,
+.cs-glimpse,
+.work-glimpse,
+.next-project,
+.testimonial-section,
+.faq-section,
+.contact-section,
+[data-include] {
+  margin-top: 0 !important;
+  margin-bottom: 60px !important;
+}
+
+[data-include] {
+  display: block;
+}
+
+main > section:last-of-type,
+body > section:last-of-type,
+[data-include]:last-of-type {
+  margin-bottom: 0 !important;
+}
+
+/* ==========================================================================
+   7. ABOUT / ESTABLISH GLOBAL CORE
+   ========================================================================== */
+.about {
+  width: 100%;
+  padding: 80px 0 40px;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.about-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.about-heading {
+  position: relative;
+  padding-top: 24px;
+}
+
+.about-label {
+  position: absolute;
+  top: 0;
+  left: 4%;
+  z-index: 5;
+  margin-bottom: 0 !important;
+}
+
+.about-title,
+h2.about-title,
+.about-heading h2 {
+  font-family: var(--font-heading, "Sora", sans-serif);
+  font-size: clamp(48px, 11vw, 180px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: clamp(2px, 1.2vw, 20px);
+  color: var(--dark-navy, #070e3a) !important;
+  text-align: center;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.about-description {
+  max-width: 1280px;
+  margin-top: 38px;
+  font-family: var(--font-body, "Onest", sans-serif);
+  font-size: 1.45rem;
+  line-height: 1.45;
+  color: var(--dark-navy, #080f3d);
+}
+
+.about-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 48px;
+  padding-bottom: 14px;
+}
+
+/* ==========================================================================
+   8. RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 992px) {
+  .about-hero-right,
+  .about-feature-card,
+  #aboutFeatureCard {
+    display: none !important;
+  }
+
+  .about-hero-container {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .about {
+    padding: 60px 0 30px;
+  }
+
+  .about-title,
+  h2.about-title,
+  .about-heading h2 {
+    letter-spacing: clamp(2px, 1vw, 8px);
+  }
+
+  .about-description {
+    font-size: 1.15rem;
+    line-height: 1.5;
+    margin-top: 28px;
+  }
+
+  .about-button-wrapper {
+    margin-top: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 { font-size: 2.25rem !important; }
+  h2,
+  .services-section > h2,
+  .establish-section h2,
+  .agency-section h2,
+  .establish-title,
+  .agency-title { 
+    font-size: 2rem !important; 
+  }
+  h3 { font-size: 1.5rem !important; }
+
+  main > section,
+  body > section,
+  .case-study-page > section,
+  [data-include] {
+    margin-bottom: 80px !important;
+  }
+
+  .about-hero-actions,
+  .service-actions,
+  .web-mobile-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    width: 100% !important;
+  }
+
+  .about-hero-actions .btn,
+  .about-hero-actions a,
+  .service-actions .service-btn,
+  .service-actions a,
+  .web-mobile-actions a {
+    flex: 1 !important;
+    width: auto !important;
+    padding: 0.75rem 0.5rem !important;
+    font-size: 0.85rem !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .about {
+    padding: 40px 0 20px;
+  }
+
+  .about-label {
+    left: 0;
+    font-size: 12px;
+    padding: 3px 12px;
+  }
+
+  .about-title,
+  h2.about-title,
+  .about-heading h2 {
+    font-size: clamp(38px, 13vw, 70px);
+    letter-spacing: 2px;
+  }
+
+  .about-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-top: 20px;
+  }
+
+  .about-button-wrapper {
+    margin-top: 28px;
+  }
+
+  .about-button-wrapper .btn {
+    width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .pill-badge,
+  .hero-pill-badge,
+  .location-badge,
+  .establish-badge,
+  .agency-badge,
+  .about-label {
+    white-space: normal !important;
+    text-align: center;
+    font-size: 0.72rem !important;
+    padding: 0.4rem 0.85rem !important;
+    max-width: 100% !important;
+  }
+}

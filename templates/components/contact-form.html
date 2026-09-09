@@ -1,0 +1,162 @@
+<section class="contact-section" id="contact">
+  <div class="contact-container">
+    <!-- Active Contact Card -->
+    <div class="contact-card" id="contactCard">
+      <div class="contact-header">
+        <div class="pill-badge">
+          <span class="dot"></span>
+          <span>Get in touch</span>
+        </div>
+        <h2 class="contact-title">Say Hello</h2>
+        <p class="contact-subtitle">
+          Have a question, project inquiry, or collaboration in mind? We'd love
+          to hear from you. Reach out and let's create something exceptional
+          together.
+        </p>
+      </div>
+
+      <form id="contactForm" class="brief-form">
+        <!-- Field 1: Multi-select Services -->
+        <div class="form-group">
+          <label class="group-label">
+            <span class="bullet-dot"></span> What do you need?
+          </label>
+          <div class="pill-options multi-select" id="servicesSelect">
+            <button type="button" class="option-pill" data-value="UI/UX Design">
+              UI/UX DESIGN
+            </button>
+            <button type="button" class="option-pill" data-value="Branding">
+              BRANDING
+            </button>
+            <button type="button" class="option-pill" data-value="MVP Design">
+              MVP DESIGN
+            </button>
+            <button
+              type="button"
+              class="option-pill"
+              data-value="No-Code Development"
+            >
+              NO-CODE DEVELOPMENT
+            </button>
+            <button
+              type="button"
+              class="option-pill"
+              data-value="Web & App Development"
+            >
+              WEB & APP DEVELOPMENT
+            </button>
+            <button
+              type="button"
+              class="option-pill"
+              data-value="Market Research"
+            >
+              MARKET RESEARCH
+            </button>
+          </div>
+        </div>
+
+        <!-- Field 2: Budget Range Slider -->
+        <div class="form-group">
+          <label class="group-label" for="budgetSlider">
+            <span class="bullet-dot"></span> Estimated budget
+          </label>
+          <div class="slider-wrapper">
+            <div class="slider-track-area">
+              <div class="slider-ticks-bar"></div>
+              <input
+                type="range"
+                id="budgetSlider"
+                class="budget-range"
+                min="200"
+                max="25000"
+                step="100"
+                value="17500"
+              />
+            </div>
+            <div class="slider-labels">
+              <span class="min-label">$ 200</span>
+              <span class="current-value-bubble" id="budgetDisplay"
+                >$ 17,500</span
+              >
+              <span class="max-label">$ 25,000+</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Field 3: Timeline -->
+        <div class="form-group">
+          <label class="group-label">
+            <span class="bullet-dot"></span> Timeline
+          </label>
+          <div class="pill-options single-select" id="timelineSelect">
+            <button type="button" class="option-pill" data-value="ASAP">
+              ASAP
+            </button>
+            <button type="button" class="option-pill" data-value="1-2 Months">
+              1-2 MONTHS
+            </button>
+            <button type="button" class="option-pill" data-value="Flexible">
+              FLEXIBLE
+            </button>
+          </div>
+        </div>
+
+        <!-- Field 4: Email Input -->
+        <div class="form-group">
+          <label class="group-label" for="userEmail">
+            <span class="bullet-dot"></span> Your email
+          </label>
+          <input
+            type="email"
+            id="userEmail"
+            name="email"
+            class="underline-input"
+            placeholder="you@company.com"
+            required
+          />
+        </div>
+
+        <!-- Field 5: Message Input -->
+        <div class="form-group">
+          <label class="group-label" for="userMessage">
+            <span class="bullet-dot"></span> Your message
+          </label>
+          <textarea
+            id="userMessage"
+            name="message"
+            class="underline-textarea"
+            placeholder="Type your message here.."
+            rows="2"
+            required
+          ></textarea>
+        </div>
+
+        <!-- Bottom Row -->
+        <div class="form-footer">
+          <p class="protocol-text">
+            By submitting, you agree to our Privacy Protocol. We typically
+            respond within 12 business hours.
+          </p>
+          <button type="submit" class="btn btn-solid" id="submitBtn">
+            Send this brief
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Success Confirmation Card (Hidden Initially) -->
+    <div class="contact-success-card" id="contactSuccessCard">
+      <div class="success-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="8 12 11 15 16 9"></polyline>
+        </svg>
+      </div>
+      <h3 class="success-title">Thank You for Reaching Out!</h3>
+      <p class="success-text">
+        We've received your enquiry and our team will review it shortly.<br />
+        <strong>We'll get back to you within 24 business hours.</strong>
+      </p>
+    </div>
+  </div>
+</section>
