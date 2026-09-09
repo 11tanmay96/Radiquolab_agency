@@ -2,6 +2,9 @@
   "cleanUrls": true,
   "rewrites": [
     { "source": "/", "destination": "/templates/index.html" },
+    { "source": "/templates/:match*", "destination": "/templates/:match*" },
+    { "source": "/api/:match*", "destination": "/api/:match*" },
+    { "source": "/:path*", "destination": "/templates/:path*.html" },
     { "source": "/about", "destination": "/templates/about-page.html" },
     { "source": "/services", "destination": "/templates/services-page.html" },
     { "source": "/portfolio", "destination": "/templates/portfolio-page.html" },
