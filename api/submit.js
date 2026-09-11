@@ -40,8 +40,9 @@ export default async function handler(req, res) {
     };
 
     const result = await collection.insertOne(newSubmission);
+    console.log("Atlas write successful, ID:", result.insertedId);
 
-    // 2. Send Email via Gmail App Password
+    // 2. Nodemailer Transporter with explicit debugging
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -50,9 +51,13 @@ export default async function handler(req, res) {
       },
     });
 
-    await transporter.sendMail({
+    const targetRecipient = process.env.EMAIL_TO || process.env.EMAIL_USER;
+    console.log(`Sending email from [${process.env.EMAIL_USER}] to [${targetRecipient}]...`);
+
+    const info = await transporter.sendMail({
       from: `"Radiquolab Alerts" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_TO || process.env.EMAIL_USER,
+      to: targetRecipient,
+      replyTo: email.trim(),
       subject: `⚡ New Project Brief from ${email}`,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; border: 1.5px solid #080f3d; border-radius: 10px;">
@@ -69,13 +74,18 @@ export default async function handler(req, res) {
       `,
     });
 
+    console.log("SMTP Response:", info.response);
+    console.log("Accepted Recipient(s):", info.accepted);
+    console.log("Rejected Recipient(s):", info.rejected);
+
     return res.status(200).json({
       success: true,
       message: "Submission stored and email dispatched",
       insertedId: result.insertedId,
+      smtpResponse: info.response,
     });
   } catch (error) {
-    console.error("Vercel Function Error:", error);
-    return res.status(500).json({ success: false, message: "Submission failed" });
+    console.error("Vercel Function / Mail Error:", error);
+    return res.status(500).json({ success: false, message: error.message || "Submission failed" });
   }
 }
