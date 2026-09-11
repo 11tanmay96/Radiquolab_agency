@@ -10,7 +10,7 @@
 @import url(/css/global/footer.css);
 
 /* ==========================================================================
-   SERVICES HERO (Desktop)
+   SERVICES & ABOUT HERO SECTION (DESKTOP)
    ========================================================================== */
 .about-hero-section {
   width: 100%;
@@ -25,6 +25,13 @@
   grid-template-columns: 1.35fr 0.85fr;
   gap: 3.5rem;
   align-items: center;
+}
+
+.about-hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .about-hero-title {
@@ -57,7 +64,7 @@
 }
 
 /* ==========================================================================
-   RIGHT ROTATING FEATURE CARD (Desktop Only)
+   RIGHT ROTATING FEATURE CARD
    ========================================================================== */
 .about-hero-right {
   display: flex;
@@ -147,7 +154,6 @@
   line-height: 1.1;
 }
 
-/* Row Item (Desktop) */
 .service-item {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -289,9 +295,68 @@
 }
 
 /* ==========================================================================
-   SERVICES RESPONSIVE
+   RESPONSIVE ENFORCEMENT (HERO & CARD ON MOBILE)
    ========================================================================== */
 @media (max-width: 992px) {
+  .about-hero-section {
+    margin: 2.5rem auto 3rem !important;
+    padding: 0 1.25rem !important;
+  }
+
+  .about-hero-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 2.5rem !important;
+  }
+
+  .about-hero-left {
+    width: 100% !important;
+    align-items: flex-start !important;
+  }
+
+  .about-hero-title {
+    font-size: clamp(2.3rem, 6vw, 3.25rem) !important;
+    line-height: 1.15 !important;
+  }
+
+  .about-hero-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 0.75rem !important;
+    width: 100% !important;
+  }
+
+  .about-hero-actions .btn {
+    flex: 1 !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  /* Force the right card container to stay visible and center below actions */
+  .about-hero-right {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 1rem auto 0 auto !important;
+  }
+
+  .about-feature-card,
+  #aboutFeatureCard {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    max-width: 320px !important;
+    height: auto !important;
+    min-height: 280px !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: 0 auto !important;
+  }
+
   .services-section > h2 {
     font-size: 2.5rem;
     margin-bottom: 2.5rem;
@@ -377,7 +442,7 @@
     border: 1.5px solid var(--border-dark) !important;
     border-radius: var(--radius-md) !important;
     font-size: 0.8rem !important;
-    font-weight: 600 !important;
+    font-weight: 600;
     color: var(--dark-navy) !important;
     text-transform: capitalize !important;
     letter-spacing: 0 !important;
@@ -434,5 +499,15 @@
     border: 1.5px solid var(--border-dark) !important;
     border-radius: var(--radius-md) !important;
     box-shadow: var(--btn-shadow) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero-actions {
+    flex-direction: column !important;
+  }
+
+  .about-hero-actions .btn {
+    width: 100% !important;
   }
 }
