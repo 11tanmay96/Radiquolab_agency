@@ -34,7 +34,7 @@ function initForm() {
     });
   });
 
-  // 2. DYNAMIC BUDGET SLIDER
+  // 2. DYNAMIC BUDGET SLIDER (Docked Right Value)
   const budgetSlider =
     form.querySelector(".budget-range") ||
     form.querySelector("input[type='range']");
@@ -45,6 +45,7 @@ function initForm() {
   const updateBudgetDisplay = () => {
     if (!budgetSlider || !budgetBubble) return;
     const val = Number(budgetSlider.value);
+
     if (val >= 25000) {
       budgetBubble.textContent = "$ 25,000+";
     } else {
@@ -131,7 +132,6 @@ function initForm() {
         body: JSON.stringify(payload)
       });
 
-      // Safe JSON parsing against HTML 502/500 error pages
       let data = {};
       try {
         data = await response.json();
@@ -140,7 +140,6 @@ function initForm() {
       }
 
       if (response.ok && data.success) {
-        // Show success confirmation
         if (contactCard && successCard) {
           contactCard.style.display = "none";
           successCard.classList.add("active");
@@ -149,7 +148,6 @@ function initForm() {
           submitBtn.textContent = "Brief Sent!";
         }
 
-        // Clean form state & reset slider/pills
         form.reset();
         updateBudgetDisplay();
         form
