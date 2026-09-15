@@ -1,37 +1,12 @@
 {
-  "outputDirectory": ".",
+  "outputDirectory": "dist",
   "cleanUrls": true,
-  "redirects": [
-    { "source": "/templates/about-page", "destination": "/about", "permanent": true },
-    { "source": "/templates/services-page", "destination": "/services", "permanent": true },
-    { "source": "/templates/portfolio-page", "destination": "/portfolio", "permanent": true },
-    { "source": "/templates/contact-us-page", "destination": "/contact", "permanent": true },
-    { "source": "/templates/sub-pages/:subpage", "destination": "/:subpage", "permanent": true },
-    { "source": "/sub-pages/:subpage", "destination": "/:subpage", "permanent": true }
-  ],
   "rewrites": [
     { "source": "/api/:match*", "destination": "/api/:match*" },
-
     { "source": "/about", "destination": "/about-page.html" },
     { "source": "/services", "destination": "/services-page.html" },
     { "source": "/portfolio", "destination": "/portfolio-page.html" },
     { "source": "/contact", "destination": "/contact-us-page.html" },
-
-    { "source": "/bella", "destination": "/sub-pages/bella.html" },
-    { "source": "/branding", "destination": "/sub-pages/branding.html" },
-    { "source": "/brg-global", "destination": "/sub-pages/brg-global.html" },
-    { "source": "/deco-dream", "destination": "/sub-pages/deco-dream.html" },
-    { "source": "/mad-works", "destination": "/sub-pages/mad-works.html" },
-    { "source": "/market-research", "destination": "/sub-pages/market-research.html" },
-    { "source": "/mob-web-dev", "destination": "/sub-pages/mob-web-dev.html" },
-    { "source": "/mvp", "destination": "/sub-pages/mvp.html" },
-    { "source": "/my-doc", "destination": "/sub-pages/my-doc.html" },
-    { "source": "/no-code-dev", "destination": "/sub-pages/no-code-dev.html" },
-    { "source": "/service-design", "destination": "/sub-pages/service-design.html" },
-    { "source": "/triikon", "destination": "/sub-pages/triikon.html" },
-    { "source": "/ui-ux-design", "destination": "/sub-pages/ui-ux-design.html" },
-    { "source": "/webscore", "destination": "/sub-pages/webscore.html" },
-    { "source": "/website", "destination": "/sub-pages/website.html" },
-    { "source": "/white-lines", "destination": "/sub-pages/white-lines.html" }
+    { "source": "/:subpage", "destination": "/sub-pages/:subpage.html" }
   ]
 }
