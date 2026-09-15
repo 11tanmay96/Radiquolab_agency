@@ -1,13 +1,62 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/templates/about-page(.html)?",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/templates/services-page(.html)?",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/templates/portfolio-page(.html)?",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/templates/contact-us-page(.html)?",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/templates/sub-pages/:subpage(.html)?",
+      "destination": "/:subpage",
+      "permanent": true
+    },
+    {
+      "source": "/sub-pages/:subpage(.html)?",
+      "destination": "/:subpage",
+      "permanent": true
+    }
+  ],
   "rewrites": [
-    { "source": "/", "destination": "/templates/index.html" },
-    { "source": "/templates/:match*", "destination": "/templates/:match*" },
     { "source": "/api/:match*", "destination": "/api/:match*" },
-    { "source": "/:path*", "destination": "/templates/:path*.html" },
+
     { "source": "/about", "destination": "/templates/about-page.html" },
     { "source": "/services", "destination": "/templates/services-page.html" },
     { "source": "/portfolio", "destination": "/templates/portfolio-page.html" },
-    { "source": "/contact", "destination": "/templates/contact-us-page.html" }
+    { "source": "/contact", "destination": "/templates/contact-us-page.html" },
+
+    { "source": "/bella", "destination": "/templates/sub-pages/bella.html" },
+    { "source": "/branding", "destination": "/templates/sub-pages/branding.html" },
+    { "source": "/brg-global", "destination": "/templates/sub-pages/brg-global.html" },
+    { "source": "/deco-dream", "destination": "/templates/sub-pages/deco-dream.html" },
+    { "source": "/mad-works", "destination": "/templates/sub-pages/mad-works.html" },
+    { "source": "/market-research", "destination": "/templates/sub-pages/market-research.html" },
+    { "source": "/mob-web-dev", "destination": "/templates/sub-pages/mob-web-dev.html" },
+    { "source": "/mvp", "destination": "/templates/sub-pages/mvp.html" },
+    { "source": "/my-doc", "destination": "/templates/sub-pages/my-doc.html" },
+    { "source": "/no-code-dev", "destination": "/templates/sub-pages/no-code-dev.html" },
+    { "source": "/service-design", "destination": "/templates/sub-pages/service-design.html" },
+    { "source": "/triikon", "destination": "/templates/sub-pages/triikon.html" },
+    { "source": "/ui-ux-design", "destination": "/templates/sub-pages/ui-ux-design.html" },
+    { "source": "/webscore", "destination": "/templates/sub-pages/webscore.html" },
+    { "source": "/website", "destination": "/templates/sub-pages/website.html" },
+    { "source": "/white-lines", "destination": "/templates/sub-pages/white-lines.html" },
+
+    { "source": "/:subpage", "destination": "/templates/sub-pages/:subpage.html" }
   ]
 }
