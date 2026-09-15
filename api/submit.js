@@ -7,6 +7,7 @@ let cachedClient = null;
 
 async function connectToDatabase() {
   if (cachedClient) return cachedClient;
+  if (!uri) throw new Error("MONGODB_URI environment variable is missing");
   const client = new MongoClient(uri);
   await client.connect();
   cachedClient = client;
@@ -31,7 +32,7 @@ export default async function handler(req, res) {
     const collection = db.collection("submissions");
 
     const newSubmission = {
-      services: services || [],
+      services: Array.isArray(services) ? services : [],
       budget: budget || "Not specified",
       timeline: timeline || "Not specified",
       email: email.trim(),
@@ -42,7 +43,7 @@ export default async function handler(req, res) {
     const result = await collection.insertOne(newSubmission);
     console.log("Atlas write successful, ID:", result.insertedId);
 
-    // 2. Nodemailer Transporter with explicit debugging
+    // 2. Nodemailer Transporter Setup
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -60,16 +61,20 @@ export default async function handler(req, res) {
       replyTo: email.trim(),
       subject: `⚡ New Project Brief from ${email}`,
       html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px; border: 1.5px solid #080f3d; border-radius: 10px;">
-          <h2 style="color: #1434cb;">New Project Brief Received</h2>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1.5px solid #080f3d; border-radius: 12px;">
+          <h2 style="color: #1434cb; margin-top: 0;">New Project Brief Received</h2>
+          <hr style="border: 0; border-top: 1px solid #cbd5e1; margin: 15px 0;" />
           <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-          <p><strong>Services:</strong> ${services && services.length > 0 ? services.join(", ") : "None"}</p>
+          <p><strong>Services:</strong> ${services && services.length > 0 ? services.join(", ") : "None specified"}</p>
           <p><strong>Budget:</strong> ${budget || "Not specified"}</p>
           <p><strong>Timeline:</strong> ${timeline || "Not specified"}</p>
-          <div style="margin-top: 15px; padding: 12px; background: #f8fafc; border-left: 4px solid #1434cb;">
+          <div style="margin-top: 15px; padding: 12px; background: #f8fafc; border-left: 4px solid #1434cb; border-radius: 4px;">
             <strong>Message:</strong>
-            <p style="margin: 6px 0 0 0;">${message || "No additional message."}</p>
+            <p style="margin: 6px 0 0 0; color: #334155; white-space: pre-line;">${message || "No additional message."}</p>
           </div>
+          <p style="margin-top: 20px; font-size: 0.8rem; color: #64748b;">
+            Atlas ID: ${result.insertedId}
+          </p>
         </div>
       `,
     });
@@ -82,10 +87,14 @@ export default async function handler(req, res) {
       success: true,
       message: "Submission stored and email dispatched",
       insertedId: result.insertedId,
+      messageId: info.messageId,
       smtpResponse: info.response,
     });
   } catch (error) {
     console.error("Vercel Function / Mail Error:", error);
-    return res.status(500).json({ success: false, message: error.message || "Submission failed" });
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Submission failed",
+    });
   }
 }

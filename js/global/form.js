@@ -12,9 +12,7 @@ function initForm() {
     document.querySelector(".contact-success-card");
 
   // 1. MULTI-SELECT (Services) & SINGLE-SELECT (Timeline) PILLS
-  const allPills = form.querySelectorAll(
-    ".option-pill, .service-pill, .timeline-pill"
-  );
+  const allPills = form.querySelectorAll(".option-pill, .service-pill, .timeline-pill");
   allPills.forEach((pill) => {
     if (pill.dataset.bound) return;
     pill.dataset.bound = "true";
@@ -34,13 +32,11 @@ function initForm() {
     });
   });
 
-  // 2. DYNAMIC BUDGET SLIDER (Docked Right Value)
+  // 2. DYNAMIC BUDGET SLIDER
   const budgetSlider =
-    form.querySelector(".budget-range") ||
-    form.querySelector("input[type='range']");
+    form.querySelector(".budget-range") || form.querySelector("input[type='range']");
   const budgetBubble =
-    form.querySelector(".current-value-bubble") ||
-    document.getElementById("budgetDisplay");
+    form.querySelector(".current-value-bubble") || document.getElementById("budgetDisplay");
 
   const updateBudgetDisplay = () => {
     if (!budgetSlider || !budgetBubble) return;
@@ -79,46 +75,48 @@ function initForm() {
       submitBtn.dataset.originalText = originalText;
     }
 
-    // Extract active service pills
+    // Extract active service pills excluding timeline elements
     const selectedServices = Array.from(
-      form.querySelectorAll(
-        ".pill-options:not(.single-select) .option-pill.active, .service-pill.active"
-      )
-    ).map((el) => el.getAttribute("data-value") || el.textContent.trim());
+      form.querySelectorAll(".service-pill.active, .pill-options:not(.single-select) .option-pill.active")
+    )
+      .filter((el) => !el.classList.contains("timeline-pill"))
+      .map((el) => el.getAttribute("data-value") || el.textContent.trim());
 
     // Extract active timeline pill
     const selectedTimelineEl = form.querySelector(
       ".pill-options.single-select .option-pill.active, .timeline-pill.active"
     );
     const selectedTimeline = selectedTimelineEl
-      ? selectedTimelineEl.getAttribute("data-value") ||
-        selectedTimelineEl.textContent.trim()
-      : null;
+      ? selectedTimelineEl.getAttribute("data-value") || selectedTimelineEl.textContent.trim()
+      : "Not specified";
 
     // Extract budget value
     const budgetVal = budgetBubble
       ? budgetBubble.textContent.trim()
       : budgetSlider
-      ? budgetSlider.value
-      : null;
+      ? `$ ${budgetSlider.value}`
+      : "Not specified";
 
     // Extract text inputs
     const emailInput = form.querySelector("input[type='email']");
     const messageInput = form.querySelector("textarea");
+    const emailValue = emailInput ? emailInput.value.trim() : "";
+
+    // Client-side email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailValue || !emailPattern.test(emailValue)) {
+      alert("Please enter a valid email address.");
+      if (emailInput) emailInput.focus();
+      return;
+    }
 
     const payload = {
       services: selectedServices,
       timeline: selectedTimeline,
       budget: budgetVal,
-      email: emailInput ? emailInput.value.trim() : "",
-      message: messageInput ? messageInput.value.trim() : ""
+      email: emailValue,
+      message: messageInput ? messageInput.value.trim() : "",
     };
-
-    if (!payload.email) {
-      alert("Please enter a valid email address.");
-      if (emailInput) emailInput.focus();
-      return;
-    }
 
     if (submitBtn) {
       submitBtn.disabled = true;
@@ -129,7 +127,7 @@ function initForm() {
       const response = await fetch("/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
 
       let data = {};
@@ -149,11 +147,13 @@ function initForm() {
         }
 
         form.reset();
+        if (budgetSlider) {
+          budgetSlider.value = budgetSlider.defaultValue || 5000;
+        }
         updateBudgetDisplay();
+
         form
-          .querySelectorAll(
-            ".option-pill.active, .service-pill.active, .timeline-pill.active"
-          )
+          .querySelectorAll(".option-pill.active, .service-pill.active, .timeline-pill.active")
           .forEach((pill) => pill.classList.remove("active"));
       } else {
         alert(data.message || "Failed to submit. Please try again.");
@@ -164,9 +164,7 @@ function initForm() {
       }
     } catch (err) {
       console.error("Submission request error:", err);
-      alert(
-        "An error occurred while connecting to the server. Please verify your connection or try again later."
-      );
+      alert("An error occurred while connecting to the server. Please verify your connection or try again later.");
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.textContent = submitBtn.dataset.originalText || originalText;

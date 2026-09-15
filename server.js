@@ -1,129 +1,180 @@
-// server.js
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import compression from "compression";
-import { MongoClient } from "mongodb";
-import nodemailer from "nodemailer";
-import path from "path";
-import { fileURLToPath } from "url";
+function initForm() {
+  const form =
+    document.getElementById("contactForm") ||
+    document.querySelector("form.brief-form") ||
+    document.querySelector("form");
+  if (!form) return;
 
-dotenv.config();
+  const contactCard =
+    document.getElementById("contactCard") || form.closest(".contact-card");
+  const successCard =
+    document.getElementById("contactSuccessCard") ||
+    document.querySelector(".contact-success-card");
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+  // 1. MULTI-SELECT (Services) & SINGLE-SELECT (Timeline) PILLS
+  const allPills = form.querySelectorAll(
+    ".option-pill, .service-pill, .timeline-pill"
+  );
+  allPills.forEach((pill) => {
+    if (pill.dataset.bound) return;
+    pill.dataset.bound = "true";
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+    pill.addEventListener("click", (e) => {
+      e.preventDefault();
+      const parentGroup = pill.closest(".pill-options");
 
-// Middleware
-app.use(compression());
-app.use(cors());
-app.use(express.json());
-app.use(express.static(__dirname, {
-  maxAge: "1d"
-}));
-
-// MongoDB Atlas Setup
-const uri = process.env.MONGODB_URI;
-const dbName = process.env.MONGODB_DB || "radiquolab_db";
-let cachedClient = null;
-
-async function connectToDatabase() {
-  if (cachedClient) return cachedClient;
-  const client = new MongoClient(uri);
-  await client.connect();
-  cachedClient = client;
-  return client;
-}
-
-// Eager database connection check on boot
-connectToDatabase()
-  .then(() => console.log(" Connected to MongoDB Atlas"))
-  .catch((err) => {
-    console.error(" MongoDB connection failed:", err.message);
-    process.exit(1);
+      if (parentGroup && parentGroup.classList.contains("single-select")) {
+        parentGroup
+          .querySelectorAll(".option-pill, .timeline-pill")
+          .forEach((p) => p.classList.remove("active"));
+        pill.classList.add("active");
+      } else {
+        pill.classList.toggle("active");
+      }
+    });
   });
 
-// Email Transporter Setup
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+  // 2. DYNAMIC BUDGET SLIDER (Docked Right Value)
+  const budgetSlider =
+    form.querySelector(".budget-range") ||
+    form.querySelector("input[type='range']");
+  const budgetBubble =
+    form.querySelector(".current-value-bubble") ||
+    document.getElementById("budgetDisplay");
+
+  const updateBudgetDisplay = () => {
+    if (!budgetSlider || !budgetBubble) return;
+    const val = Number(budgetSlider.value);
+
+    if (val >= 25000) {
+      budgetBubble.textContent = "$ 25,000+";
+    } else {
+      budgetBubble.textContent = `$ ${val.toLocaleString()}`;
+    }
+  };
+
+  if (budgetSlider && budgetBubble && !budgetSlider.dataset.bound) {
+    budgetSlider.dataset.bound = "true";
+    budgetSlider.addEventListener("input", updateBudgetDisplay);
+    updateBudgetDisplay();
   }
-});
 
-// Form Submission Endpoint
-app.post("/api/submit", async (req, res) => {
-  try {
-    const { services, budget, timeline, email, message } = req.body;
+  // 3. FORM SUBMISSION HANDLER
+  if (form.dataset.initialized) return;
+  form.dataset.initialized = "true";
 
-    if (!email) {
-      return res.status(400).json({ success: false, message: "Email is required" });
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const submitBtn =
+      form.querySelector("button[type='submit']") ||
+      form.querySelector(".btn-submit") ||
+      form.querySelector(".btn-solid");
+
+    const originalText = submitBtn
+      ? submitBtn.dataset.originalText || submitBtn.textContent
+      : "Send this brief";
+
+    if (submitBtn && !submitBtn.dataset.originalText) {
+      submitBtn.dataset.originalText = originalText;
     }
 
-    // 1. Save Document in MongoDB
-    const client = await connectToDatabase();
-    const db = client.db(dbName);
-    const collection = db.collection("submissions");
+    // Extract active service pills
+    const selectedServices = Array.from(
+      form.querySelectorAll(
+        ".pill-options:not(.single-select) .option-pill.active, .service-pill.active"
+      )
+    ).map((el) => el.getAttribute("data-value") || el.textContent.trim());
 
-    const newSubmission = {
-      services: services || [],
-      budget: budget || "Not specified",
-      timeline: timeline || "Not specified",
-      email: email.trim(),
-      message: message ? message.trim() : "No message provided",
-      submittedAt: new Date()
+    // Extract active timeline pill
+    const selectedTimelineEl = form.querySelector(
+      ".pill-options.single-select .option-pill.active, .timeline-pill.active"
+    );
+    const selectedTimeline = selectedTimelineEl
+      ? selectedTimelineEl.getAttribute("data-value") ||
+        selectedTimelineEl.textContent.trim()
+      : null;
+
+    // Extract budget value
+    const budgetVal = budgetBubble
+      ? budgetBubble.textContent.trim()
+      : budgetSlider
+      ? budgetSlider.value
+      : null;
+
+    // Extract text inputs
+    const emailInput = form.querySelector("input[type='email']");
+    const messageInput = form.querySelector("textarea");
+
+    const payload = {
+      services: selectedServices,
+      timeline: selectedTimeline,
+      budget: budgetVal,
+      email: emailInput ? emailInput.value.trim() : "",
+      message: messageInput ? messageInput.value.trim() : ""
     };
 
-    const result = await collection.insertOne(newSubmission);
-    console.log("New submission inserted into MongoDB:", result.insertedId);
+    if (!payload.email) {
+      alert("Please enter a valid email address.");
+      if (emailInput) emailInput.focus();
+      return;
+    }
 
-    // 2. Dispatch Email Notification
-    const mailOptions = {
-      from: `"Radiquolab Design Agency Alerts" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_TO || process.env.EMAIL_USER,
-      subject: `⚡ New Project Brief from ${email}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1.5px solid #080f3d; border-radius: 12px;">
-          <h2 style="color: #1434cb; margin-top: 0;">New Project Brief Received</h2>
-          <hr style="border: 0; border-top: 1px solid #cbd5e1; margin: 15px 0;" />
-          
-          <p><strong>Client Email:</strong> <a href="mailto:${email}">${email}</a></p>
-          <p><strong>Selected Services:</strong> ${services && services.length > 0 ? services.join(", ") : "None selected"}</p>
-          <p><strong>Estimated Budget:</strong> ${budget || "Not specified"}</p>
-          <p><strong>Timeline:</strong> ${timeline || "Not specified"}</p>
-          
-          <div style="margin-top: 20px; padding: 15px; background: #f8fafc; border-left: 4px solid #1434cb; border-radius: 4px;">
-            <strong>Message:</strong>
-            <p style="margin: 8px 0 0 0; color: #334155; white-space: pre-line;">${message || "No additional message."}</p>
-          </div>
-          
-          <p style="margin-top: 25px; font-size: 0.8rem; color: #64748b;">
-            MongoDB Document ID: ${result.insertedId}
-          </p>
-        </div>
-      `
-    };
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+    }
 
-    await transporter.sendMail(mailOptions);
-    console.log("Email notification sent successfully.");
+    try {
+      const response = await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
 
-    return res.status(200).json({
-      success: true,
-      message: "Brief stored and email sent successfully",
-      insertedId: result.insertedId
-    });
-  } catch (error) {
-    console.error("Submission/Mail error:", error);
-    return res.status(500).json({
-      success: false,
-      message: "Failed to process brief submission"
-    });
-  }
-});
+      let data = {};
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error(`Server returned status ${response.status}`);
+      }
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+      if (response.ok && data.success) {
+        if (contactCard && successCard) {
+          contactCard.style.display = "none";
+          successCard.classList.add("active");
+          successCard.scrollIntoView({ behavior: "smooth", block: "center" });
+        } else if (submitBtn) {
+          submitBtn.textContent = "Brief Sent!";
+        }
+
+        form.reset();
+        updateBudgetDisplay();
+        form
+          .querySelectorAll(
+            ".option-pill.active, .service-pill.active, .timeline-pill.active"
+          )
+          .forEach((pill) => pill.classList.remove("active"));
+      } else {
+        alert(data.message || "Failed to submit. Please try again.");
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = submitBtn.dataset.originalText || originalText;
+        }
+      }
+    } catch (err) {
+      console.error("Submission request error:", err);
+      alert(
+        "An error occurred while connecting to the server. Please verify your connection or try again later."
+      );
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = submitBtn.dataset.originalText || originalText;
+      }
+    }
+  });
+}
+
+window.initForm = initForm;
+document.addEventListener("DOMContentLoaded", initForm);
+document.addEventListener("componentsLoaded", initForm);

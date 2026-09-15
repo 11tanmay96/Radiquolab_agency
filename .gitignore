@@ -10,3 +10,10 @@ Thumbs.db
 
 .vscode/
 .idea/
+
+# Compiled build files
+/about-page.html
+/contact-us-page.html
+/portfolio-page.html
+/services-page.html
+/sub-pages/
