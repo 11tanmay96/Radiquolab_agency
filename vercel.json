@@ -1,4 +1,5 @@
 {
+  "outputDirectory": ".",
   "cleanUrls": true,
   "redirects": [
     { "source": "/templates/about-page", "destination": "/about", "permanent": true },
@@ -10,10 +11,10 @@
   ],
   "rewrites": [
     { "source": "/api/:match*", "destination": "/api/:match*" },
-    { "source": "/about", "destination": "/templates/about-page.html" },
-    { "source": "/services", "destination": "/templates/services-page.html" },
-    { "source": "/portfolio", "destination": "/templates/portfolio-page.html" },
-    { "source": "/contact", "destination": "/templates/contact-us-page.html" },
-    { "source": "/:subpage", "destination": "/templates/sub-pages/:subpage.html" }
+    { "source": "/about", "destination": "/about-page.html" },
+    { "source": "/services", "destination": "/services-page.html" },
+    { "source": "/portfolio", "destination": "/portfolio-page.html" },
+    { "source": "/contact", "destination": "/contact-us-page.html" },
+    { "source": "/:subpage", "destination": "/sub-pages/:subpage.html" }
   ]
 }
