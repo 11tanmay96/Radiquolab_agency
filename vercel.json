@@ -2,11 +2,6 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/api/:match*", "destination": "/api/:match*" },
-    { "source": "/about", "destination": "/about-page.html" },
-    { "source": "/services", "destination": "/services-page.html" },
-    { "source": "/portfolio", "destination": "/portfolio-page.html" },
-    { "source": "/contact", "destination": "/contact-us-page.html" },
-    { "source": "/:subpage", "destination": "/sub-pages/:subpage.html" }
+    { "source": "/api/:match*", "destination": "/api/:match*" }
   ]
 }

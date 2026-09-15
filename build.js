@@ -60,38 +60,45 @@ function buildFile(sourcePath, destPath) {
 }
 
 function runBuild() {
-  console.log("--- Starting Build ---");
+  console.log("--- Starting Clean Build ---");
 
-  // 1. Reset dist
   if (fs.existsSync(DIST_DIR)) {
     fs.rmSync(DIST_DIR, { recursive: true, force: true });
   }
   fs.mkdirSync(DIST_DIR, { recursive: true });
   fs.mkdirSync(DIST_SUBPAGES, { recursive: true });
 
-  // 2. Build root index.html
+  // 1. Root index.html
   const rootIndex = path.join(PROJECT_ROOT, "index.html");
   if (fs.existsSync(rootIndex)) {
     buildFile(rootIndex, path.join(DIST_DIR, "index.html"));
   }
 
-  // 3. Build main templates (about-page, contact-us-page, services-page, portfolio-page)
-  if (fs.existsSync(TEMPLATES_DIR)) {
-    const templateFiles = fs.readdirSync(TEMPLATES_DIR).filter((f) => f.endsWith(".html"));
-    templateFiles.forEach((file) => {
-      buildFile(path.join(TEMPLATES_DIR, file), path.join(DIST_DIR, file));
-    });
+  // 2. Map template filenames directly to matching clean route files
+  const pageMappings = {
+    "about-page.html": "about.html",
+    "contact-us-page.html": "contact.html",
+    "services-page.html": "services.html",
+    "portfolio-page.html": "portfolio.html"
+  };
+
+  for (const [srcName, destName] of Object.entries(pageMappings)) {
+    const srcFile = path.join(TEMPLATES_DIR, srcName);
+    if (fs.existsSync(srcFile)) {
+      buildFile(srcFile, path.join(DIST_DIR, destName));
+    }
   }
 
-  // 4. Build sub-pages
+  // 3. Compile subpages directly into dist/ so /ui-ux-design matches dist/ui-ux-design.html
   if (fs.existsSync(SUBPAGES_DIR)) {
     const subFiles = fs.readdirSync(SUBPAGES_DIR).filter((f) => f.endsWith(".html"));
     subFiles.forEach((file) => {
+      buildFile(path.join(SUBPAGES_DIR, file), path.join(DIST_DIR, file));
       buildFile(path.join(SUBPAGES_DIR, file), path.join(DIST_SUBPAGES, file));
     });
   }
 
-  // 5. Copy static assets
+  // 4. Copy static assets
   ["assets", "css", "js"].forEach((folder) => {
     const folderPath = path.join(PROJECT_ROOT, folder);
     if (fs.existsSync(folderPath)) {
